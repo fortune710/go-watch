@@ -1,0 +1,217 @@
+.landingPage{
+
+    section{
+        min-height: 85vh;
+    }
+}
+
+.secondNav{
+    height: 70px;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background);
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+.noDisplay{
+    display: none;
+}
+
+.display{
+    display: flex;
+}
+
+.introduction{
+    height: 100vh;
+    background: linear-gradient(70deg, var(--background) 20%, rgba(0, 0, 0, 0)), url('../../assets/intro.webp');
+    background-position: center;
+    background-size: cover;
+
+    .gradientBottom {
+        background: linear-gradient(0deg, var(--background) 30%, rgba(0, 0, 0, 0) 100%);
+        height: 15%;
+    }
+}
+
+.greeting{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 40%;
+    padding: 2rem;
+    margin-top: 5%;
+
+    h2{
+        font-size: 35px;
+        line-height: normal;
+    }
+
+    p{
+        font-size: 20px;
+    }
+
+    img {
+        width: 40%;
+        margin-bottom: 10px;
+    }
+}
+
+.input {
+    display: flex;
+    height: 45px;
+    width: 100%;
+
+    input {
+        background-color: #333333;
+        height: 100%;
+        border-radius: 5px 0 0 5px;
+        padding: 0 1rem;
+        width: 320px;
+        color: var(--text);
+
+        &::placeholder {
+            color: var(--text);
+        }
+
+        &:focus, &:active {
+            outline: 0.2px solid var(--text);
+        }
+    }
+
+    button{
+        border-radius: 0 5px 5px 0;
+        color: var(--text);
+        height: 100%;
+    }
+}
+
+.secondSection {
+    height: 150vh;
+}
+
+.secondSectionIntro{
+    background-image: linear-gradient(0deg, #06070d 2%, rgba(0, 0, 0, 0)) , url('../../assets/antman-backdrop.webp');
+    background-position: center;
+    background-size: cover;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 4rem;
+
+    h2{
+        font-size: 32px;
+        line-height: normal;
+    }
+
+    p{
+        font-size: 20px;
+    }
+}
+
+.movies{
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.movieCard{
+    width: 15%;
+    margin: 0 15px;
+}
+
+.familyFriendly {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+    text-align: center;
+
+    h3{
+        font-size: 35px;
+        font-weight: 500;
+        margin: 10px 0 50px 0;
+    }
+
+    p{
+        font-size: 20px;
+        margin: 0;
+    }
+}
+
+.devicesSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.devices{
+    margin: 4rem 0;
+    display: grid;
+    padding: 0 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.deviceCard {
+    text-align: center;
+    h4{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    *{
+        box-sizing: border-box;
+    }
+    .devices{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .greeting{
+        width: 100%;
+    }
+
+    
+}
+
+@media screen and (max-width: 450px) {
+    .greeting{
+        padding: 10px;
+    }
+
+    .input{
+        input{
+            width: 70vw;
+        }
+    }
+
+    .secondSectionIntro{
+        background-image: linear-gradient(0deg, #06070d 2%, rgba(0, 0, 0, 0)) , url('../../assets/antman-backdrop-mobile.webp');
+        background-position: center;
+        background-size: contain;    
+        align-items: center;
+        padding: 0;
+        justify-content: flex-end;
+    }
+
+    .movies{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+}
