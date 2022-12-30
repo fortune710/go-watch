@@ -1,0 +1,32 @@
+.mainContent{
+    width: 100%;
+    margin-left: var(--sidebar-width);
+}
+
+.scrollView {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+
+    .scrollCard{
+        width: 150px;
+        margin: 0 1rem;
+
+    }
+    img{
+        width: 150px;
+        margin-right: 20px ;
+    }
+}
+
+
+@media screen and (min-width: 850px) {
+    .sideMenu{
+        display: flex;
+    }
+
+    .mainContent{
+        width: 80%;
+    }
+}

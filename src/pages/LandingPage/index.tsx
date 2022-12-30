@@ -9,8 +9,10 @@ import { useInView } from "react-intersection-observer";
 
 import LaptopMockup from "../../assets/laptop.svg";
 import PhoneMockup from "../../assets/phone.svg";
+import { useNavigate } from "react-router-dom";
 export const LandingPage = () => {
     const [ref, inView] = useInView();
+    const navigate = useNavigate();
 
     const loginButtonStyles:SxProps = {
         boxShadow: 0,
@@ -20,7 +22,8 @@ export const LandingPage = () => {
         right: '1rem',
         color: 'white',
         top: '0.3rem',
-        display: inView ? "block" : "none"
+        display: inView ? "block" : "none",
+        zIndex: 999
     }
 
     const secondLoginStyles: SxProps = {
@@ -84,7 +87,7 @@ export const LandingPage = () => {
                 <div className={styles.movies}>
                     {
                         Movies.map((movie) => (
-                            <img className={styles.movieCard} src={movie.image} title={movie.name} alt={`${movie.name}`}/>
+                            <img key={movie.id} className={styles.movieCard} src={movie.image} title={movie.name} alt={`${movie.name}`}/>
                         ))
                     }
                 </div>
@@ -97,8 +100,8 @@ export const LandingPage = () => {
                 </div>
 
                 <div>
-                    <img src={LaptopMockup} width={600} alt="" />
-                    <img src={PhoneMockup} width={160} alt="" />
+                    <img className={styles.laptop} src={LaptopMockup} width={600} alt="" />
+                    <img className={styles.phone} src={PhoneMockup} width={160} alt="" />
                 </div>
 
             </section>
@@ -125,6 +128,9 @@ export const LandingPage = () => {
 
                 </div>
             </section>
+            <Button onClick={() => navigate('/home')}>
+                Go to Home Page
+            </Button>
             <Footer />
         </main>
     )

@@ -1,0 +1,58 @@
+.content {
+    font-family: 'Montserrat', sans-serif;
+    h4 {
+        margin: 7px 0;
+    }
+    img {
+        width: 100%;
+    }
+}
+
+.title {
+    display: flex;
+}
+
+.currentSeason {
+    display: flex;
+    background-color: #111111;
+    border-radius: 5px;
+    padding: 8px;
+    gap: 2em;
+
+    img {
+        width: 30%;
+    }
+}
+
+.rating{
+    display: flex;
+    align-items: center;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--background);
+    font-family: 'Montserrat', sans-serif;
+    width: max-content;
+    padding: 1px 5px;
+}
+
+.providers {
+    li {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        height: 60px;
+    }
+}
+
+@media screen and (min-width: 769px){
+    .content {
+
+        img {
+            width: 200px;
+        }
+    }
+
+    .details {
+        display: flex;
+    }
+}

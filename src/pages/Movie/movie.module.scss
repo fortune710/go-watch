@@ -1,0 +1,18 @@
+.movieInfo {
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.movieImage {
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .movieInfo{
+        display: flex;
+    }
+    .movieImage {
+        width: 200px;
+        border-radius: 5px;
+    }
+}
