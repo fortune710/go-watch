@@ -1,23 +1,16 @@
-.mainContent{
-    width: 100%;
-    margin-left: var(--sidebar-width);
+.scrollCard{
+    width: 120px;
+    max-height: 180px;
+    background-color: var(--background-tint);
+    
+    img{
+        width: 100%;
+    }
+
 }
 
-.scrollView {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    overflow-x: scroll;
-
-    .scrollCard{
-        width: 150px;
-        margin: 0 1rem;
-
-    }
-    img{
-        width: 150px;
-        margin-right: 20px ;
-    }
+.section {
+    margin: 15px 0;
 }
 
 
