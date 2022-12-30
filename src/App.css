@@ -8,6 +8,9 @@
   --text: #FCFFFC;
   --primary-2: #2C3E50;
   --primary-2-tint: #2BA84A;
+  --background-tint: #111111;
+
+  --sidebar-width: 200px;
 }
 
 *{
@@ -21,14 +24,18 @@ body{
   color: var(--text);
 }
 
-h1, h2, h3{
+h1, h2, h3, h4, h5{
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   margin: 0;
 }
 
+h4 {
+  font-size: 14px;
+}
 p{
   font-family: 'Montserrat', sans-serif;
+  margin: 10px 0;
   font-weight: 500;
 }
 
@@ -44,3 +51,28 @@ nav img {
   height: 45px;
 }
 
+main {
+  height: max-content;
+}
+
+.sidemenu-page {
+  margin-left: var(--sidebar-width);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+section {
+  margin-bottom: 7px;
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .sidemenu-page {
+    --sidebar-width: 0;
+    padding: 20px 8px 0 8px; 
+  }
+}
