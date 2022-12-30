@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import styles from "./movie.module.scss";
 import { Chip } from "@mui/material";
-import { ActorCard, Slides } from "../../components";
+import { ActorCard, ReviewCard, SimilarMovie, Slides } from "../../components";
 import { BackButton } from "../../components/BackButton/back-button";
 
 interface Genre {
@@ -49,26 +49,28 @@ export const MovieDetailPage = () => {
         <BackButton/>
         {
             movie && (
-            <section className={styles.movieInfo}>
+            <div>
                 <img className={styles.movieImage} src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="Poster"/>
-                <h2>{movie.title}</h2>
-                <h4>{movie.tagline}</h4>
-                <p>
-                    Release Date: {movie.release_date}
-                </p>
-                <div>
-                    {
-                        movie.genres.map((genre:Genre) => (
-                            <Chip key={genre.id} color="primary" label={genre.name} clickable={false}/>
-                        ))
-                    }
-                </div>
+                <section className={styles.movieInfo}>
+                    <h2>{movie.title}</h2>
+                    <h4>{movie.tagline}</h4>
+                    <p>
+                        Release Date: {movie.release_date}
+                    </p>
+                    <div>
+                        {
+                            movie.genres.map((genre:Genre) => (
+                                <Chip key={genre.id} color="primary" label={genre.name} clickable={false}/>
+                            ))
+                        }
+                    </div>
 
-                <div>
-                    <h3>Overview</h3>
-                    <p>{movie.overview}</p>
-                </div>
-            </section>
+                    <div>
+                        <h3>Overview</h3>
+                        <p>{movie.overview}</p>
+                    </div>
+                </section>
+            </div>
             )
 
         }
@@ -79,7 +81,7 @@ export const MovieDetailPage = () => {
                     <h2>Cast</h2>
                     <Slides>
                     {
-                        credits.cast.splice(0, 7).map((actor:any) => (
+                        credits.cast.map((actor:any) => (
                             <ActorCard
                                 key={actor.id}
                                 character={actor.character}
@@ -100,12 +102,14 @@ export const MovieDetailPage = () => {
             reviews && (
             <>
                 <section>
+                    <h2>Reviews</h2>
                     {
-                        reviews.results.splice(0, 3).map((review:any) => (
-                            <div>
-                                <h4>{review.author}</h4>
-                                <p>{review.content}</p>
-                            </div>
+                        reviews.results.slice(0, 3).map((review:any) => (
+                            <ReviewCard
+                                date={review.created_at}
+                                author={review.author}
+                                content={review.content}
+                            />
                         ))
                     }
                 </section>
@@ -113,14 +117,21 @@ export const MovieDetailPage = () => {
             </>
             )
         }
-        {
-            similarMovies?.map((movie:any) => {
-                <div>
-                    <img src={'https://image.tmdb.org/t/p/w200'+movie.poster_path} alt={`${movie.name}`}/>
-                    <h4>{movie.title}</h4>
-                </div>
-            })
-        }
+        <section>
+            <h3>If you liked this movie, check out these one too</h3>
+            <Slides>
+            {
+                similarMovies?.map((movie:any) => (
+                    <SimilarMovie
+                        image={'https://image.tmdb.org/t/p/w200'+movie.backdrop_path}
+                        name={movie.title}
+                        rating={movie.vote_average}
+                    />
+                ))
+            }            
+            </Slides>
+
+        </section>
     </main>
   )
 }
