@@ -1,0 +1,29 @@
+.searchbar{
+    display: flex;
+    background-color: #333333;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    padding: 0 10px;
+
+    input {
+        background-color: #333333;
+        height: 100%;
+        border-radius: 5px 0 0 5px;
+        padding: 0 1rem;
+        width: 100%;
+        color: var(--text);
+        border: 0;
+
+        &::placeholder {
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        &:focus, &:active {
+            border: 0;
+            outline: 0;
+        }
+    }
+}
