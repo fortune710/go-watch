@@ -1,0 +1,12 @@
+.slider {
+    display: grid;
+    align-items: center;
+    grid-template-columns: unset;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-align: start;
+    grid-auto-flow: column;
+    grid-template-rows: unset;
+    margin: 7px 0;
+    gap: 1em;
+}

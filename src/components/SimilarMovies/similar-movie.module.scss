@@ -1,0 +1,24 @@
+.movie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 280px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        filter: brightness(1.2);
+    }
+
+    img {
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    .details {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

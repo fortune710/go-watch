@@ -1,0 +1,38 @@
+.sidemenu {
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    padding: 8px;
+    width: var(--sidebar-width);
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0
+    }
+}
+
+.listItem {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    border-radius: 5px;
+    height: 50px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px;
+
+    &:hover, &:active {
+        filter: brightness(1.2);
+    } 
+}
+
+.active {
+    background-color: #ffffff22;
+    color: var(--primary)
+}
+
+@media screen and (max-width: 768px){
+    .sidemenu {
+        display: none;
+    }
+}
