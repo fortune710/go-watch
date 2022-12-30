@@ -4,6 +4,7 @@ import axios from "axios";
 import styles from "./home.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 
 export const HomePage: React.FC = () => {
     const [trendingMovies, setTrendingMovies] = useState<any>([]);
@@ -44,11 +45,19 @@ export const HomePage: React.FC = () => {
                     <h2>Trending Movies</h2>
                     
                     <Slides>
-                        {trendingMovies.map((movie: any) => (
-                            <div className={styles.scrollCard} onClick={() => navigate(`/movie/${movie.id}`)}>
-                                <img key={movie.id} title={movie.title} src={`https://image.tmdb.org/t/p/w1280${movie?.poster_path}`} alt={movie.title}/>
-                            </div>
-                        ))}
+                        {trendingMovies.map((movie: any) => {
+                            if(!movie.poster_path){
+                                return <Skeleton variant="rounded" width={'120px'} height={'180px'}/>
+                            } else {
+                                return (
+                                <div className={styles.scrollCard} onClick={() => navigate(`/movie/${movie.id}`)}>
+                                    <img key={movie.id} title={movie.title} src={`https://image.tmdb.org/t/p/w1280${movie?.poster_path}`} alt={movie.title}/>
+                                </div>
+                                )
+                            }
+                        
+                            }
+                        )}
                     </Slides>
                 </div>
 
@@ -58,13 +67,14 @@ export const HomePage: React.FC = () => {
                         {
                             !trendingShows ? (
                                 <>
-                                <div className={styles.slideCards}/>
-                                <div className={styles.slideCards}/>
-                                <div className={styles.slideCards}/>
-                                <div className={styles.slideCards}/>
-                                <div className={styles.slideCards}/>
-                                <div className={styles.slideCards}/>
-                                <div className={styles.slideCards}/>                                
+                                <Skeleton variant="rounded" width={'120px'} height={'180px'}/>
+                                <Skeleton variant="rounded" width={'120px'} height={'180px'}/>
+                                <Skeleton variant="rounded" width={'120px'} height={'180px'}/>
+                                <Skeleton variant="rounded" width={'120px'} height={'180px'}/>
+                                <Skeleton variant="rounded" width={'120px'} height={'180px'}/>
+                                <Skeleton variant="rounded" width={'120px'} height={'180px'}/>
+                                <Skeleton variant="rounded" width={'120px'} height={'180px'}/>
+
                                 </>
                                 )
                             : <>

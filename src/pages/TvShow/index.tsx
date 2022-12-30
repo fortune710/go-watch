@@ -23,6 +23,7 @@ export const TVShowPage: React.FC = () => {
         <BackButton/>
         <main className={styles.content}>
             <div className={styles.details}>
+                { !details?.poster_path && <div className={styles.emptyImage}>Loading Image</div> }
                 <img src={"https://image.tmdb.org/t/p/w500"+details?.poster_path} alt={details?.name}/>
                 <section>
 

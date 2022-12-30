@@ -8,6 +8,13 @@
     }
 }
 
+.emptyImage {
+    width: 100%;
+    aspect-ratio: 360/540;
+    max-height: 540px;
+    background-color: var(--background-tint);
+}
+
 .title {
     display: flex;
 }
