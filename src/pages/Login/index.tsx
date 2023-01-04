@@ -12,7 +12,10 @@ export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
 
     const buttonStyles: SxProps = {
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        borderRadius: '10px',
+        width: '90%',
+        height: '50px'
     }
 
     const inputStyles: SxProps = {

@@ -12,7 +12,10 @@ export const SignUpPage: React.FC = () => {
     const navigate = useNavigate();
 
     const buttonStyles: SxProps = {
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        width: '90%',
+        height: '50px',
+        borderRadius: '10px',
     }
 
     const inputStyles: SxProps = {
