@@ -1,4 +1,4 @@
-import { Bookmark, Home, Search } from '@mui/icons-material';
+import { Bookmark, Home, Person, Search } from '@mui/icons-material';
 import styles from './sidemenu.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -14,6 +14,10 @@ const links = [
     {
         title: 'Favourites',
         icon: <Bookmark/>
+    },
+    {
+        title: 'Profile',
+        icon: <Person />
     }
 ]
 
