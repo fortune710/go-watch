@@ -1,14 +1,39 @@
 import { useParams } from "react-router-dom";
 import { useTvShow } from "../../hooks/useTvShow";
 import styles from './tv-show.module.scss';
-import { Avatar, Button, Chip } from "@mui/material";
+import { Avatar, Button, Chip, Snackbar } from "@mui/material";
 import { ActorCard, BackButton, ReviewCard, SimilarMovie, Slides } from "../../components";
 import { Bookmark, BookmarkAdd, Star } from "@mui/icons-material";
+import { useAuth } from "../../hooks/useAuth";
+import { addDoc, collection, getFirestore, setDoc } from "firebase/firestore";
+import { app } from "../../utils";
+import { useState } from "react";
 
 export const TVShowPage: React.FC = () => {
     const { id } = useParams<{ id:string }>();
     const show = useTvShow(id);
+    const { user } = useAuth();
+    const firestore = getFirestore(app);
 
+    const [toast, setToast] = useState({
+        open: false,
+        message: ''
+    });
+
+    const addToFavourites = async () => {
+        const query = collection(firestore, `users/${user?.uid}/favourites`);
+        try {
+            await addDoc(query, {
+                id: show?.details.id,
+                title: show?.details.name,
+                poster_path: "https://image.tmdb.org/t/p/w500"+show?.details.poster_path,
+            })
+            setToast({ open: true, message: `${show?.details.name} has been added to Favourites` })
+        }
+        catch(err){
+            console.error(err)
+        }
+    }
     const buttonStyle = {
         textTransform:'capitalize',
         margin: '0 auto',
@@ -21,6 +46,7 @@ export const TVShowPage: React.FC = () => {
 
         <>
         <BackButton/>
+        <Snackbar open={toast.open} message={toast.message} onClose={() => setToast({ open: false, message: "" })}/>
         <main className={styles.content}>
             <div className={styles.details}>
                 { !details?.poster_path && <div className={styles.emptyImage}>Loading Image</div> }
@@ -45,7 +71,7 @@ export const TVShowPage: React.FC = () => {
                         { details?.last_air_date && <h4>Last Aired: {details?.last_air_date}</h4> }
                     </div>
 
-                    <Button variant="contained" sx={buttonStyle} startIcon={<BookmarkAdd/>}>
+                    <Button onClick={addToFavourites} variant="contained" sx={buttonStyle} startIcon={<BookmarkAdd/>}>
                         Add to Favourites
                     </Button>
                 </section>

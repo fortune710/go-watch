@@ -13,6 +13,7 @@ import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import { app } from './utils';
 import { LoginPage } from './pages/Login';
 import { ProfilePage } from './pages/Profile';
+import { FavouritesPage } from './pages/FavourtitesPage';
 
 const SignUpPage = lazy(() => import('./pages/SignUp').then(m=> ({ default: m.SignUpPage })))
 
@@ -38,7 +39,7 @@ function App() {
         <Route path="/search" element={<SearchPage/>} />
         <Route path="/movie/:id" element={<MovieDetailPage/>} />
         <Route path="/show/:id" element={<TVShowPage/>} />
-        <Route path="/favourites" element={<ComingSoon/>}/>
+        <Route path="/favourites" element={<FavouritesPage/>}/>
         <Route path="/profile" element={<ProfilePage/>}/>
         <Route path="/signup" element={<SignUpPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
