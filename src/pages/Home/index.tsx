@@ -40,7 +40,7 @@ export const HomePage: React.FC = () => {
         <>
             <Sidemenu/>
 
-            <section className="sidemenu-page">                
+            <section className="sidemenu-page">               
                 <div className={styles.section}>
                     <h2>Trending Movies</h2>
                     
