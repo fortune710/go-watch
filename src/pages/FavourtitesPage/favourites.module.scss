@@ -1,0 +1,27 @@
+.section {
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.favourites {
+    margin-top: 10px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    article {
+        width: 90%;
+        margin: 0 auto;
+        img {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 768px){
+    .favourites {
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+}

@@ -26,7 +26,7 @@ export const Sidemenu: React.FC = () => {
     const location = useLocation();
 
     return(
-        <section className={styles.sidemenu}>
+        <aside className={styles.sidemenu}>
             <ul>
                 {
                     links.map((link) => (
@@ -39,6 +39,6 @@ export const Sidemenu: React.FC = () => {
                     ))
                 }
             </ul>
-        </section>
+        </aside>
     )
 }

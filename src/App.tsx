@@ -14,6 +14,7 @@ import { app } from './utils';
 import { LoginPage } from './pages/Login';
 import { ProfilePage } from './pages/Profile';
 import { FavouritesPage } from './pages/FavourtitesPage';
+import { TVShowSeasonPage } from './pages/TvShowSeasons';
 
 const SignUpPage = lazy(() => import('./pages/SignUp').then(m=> ({ default: m.SignUpPage })))
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage/>}/>
         <Route path="/signup" element={<SignUpPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/show/:id/season/:season_num" element={<TVShowSeasonPage/>}/>
       </Routes>
     </Suspense>
   )

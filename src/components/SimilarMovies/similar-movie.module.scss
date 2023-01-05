@@ -22,3 +22,11 @@
         justify-content: space-between;
     }
 }
+
+@media screen and (min-width: 768px) {
+    .movie {
+        img {
+            width: 100% !important;
+        }
+    }
+}

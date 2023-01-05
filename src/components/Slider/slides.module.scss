@@ -3,10 +3,31 @@
     align-items: center;
     grid-template-columns: unset;
     overflow-x: scroll;
+    overflow-y: hidden;
     scroll-behavior: smooth;
     scroll-snap-align: start;
     grid-auto-flow: column;
     grid-template-rows: unset;
     margin: 7px 0;
     gap: 1em;
+}
+
+@media screen and (min-width: 768px) {
+    .slider {
+
+        &::-webkit-scrollbar {
+            margin-top: 5px;
+            width: 5px;
+            height: 5px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: var(--background-tint);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 15px;
+        }
+    }
 }

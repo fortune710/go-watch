@@ -14,6 +14,8 @@ export const useReadDocFromFirestore = (path:string) => {
         .then(doc => {
             setDoc(doc.data())
         })
+        .catch(err => setError(err))
+        .finally(() => setLoading(false))
     }, [path]);
 
     return { document, loading, error };
@@ -22,6 +24,8 @@ export const useReadDocFromFirestore = (path:string) => {
 export const useReadDocsFromFirestore = (path:string) => {
     const query = collection(firestore, path);
     const [documents, setDocs] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<any>(null);
     
     useEffect(() => {
         const unsubscribe = onSnapshot(query, {
@@ -31,12 +35,17 @@ export const useReadDocsFromFirestore = (path:string) => {
                     data = [...data, doc.data()]
                 ))
                 setDocs(data)
+                setLoading(false)
+            },
+            error: (err) => {
+                setError(err.code)
+                setLoading(false)
             }
         })
         return () => unsubscribe()
     }, [path]);
 
-    return { documents };
+    return { documents, loading, error };
 }
 
 export const useWriteDocToFirestore = (path:string, data:any) => {

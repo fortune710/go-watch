@@ -7,3 +7,5 @@ export * from './BottomNavbar/bottom-nav';
 export * from './SimilarMovies/similar-movies';
 export * from './BackButton/back-button';
 export * from './ReviewCard/review-card';
+export * from './Modal/modal';
+export * from './SecondHeader/second-header';

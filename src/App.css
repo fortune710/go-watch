@@ -10,7 +10,7 @@
   --primary-2-tint: #2BA84A;
   --background-tint: #111111;
 
-  --sidebar-width: 200px;
+  --sidebar-width: 250px;
 }
 
 *{
@@ -22,6 +22,7 @@ body{
   padding: 0;
   background: var(--background);
   color: var(--text);
+  scroll-behaviour: smooth;
 }
 
 h1, h2, h3, h4, h5{
@@ -57,6 +58,8 @@ main {
 
 .sidemenu-page {
   margin-left: var(--sidebar-width);
+  width: auto;
+  padding: 20px 8px 0 8px; 
 }
 
 ul {
@@ -70,9 +73,19 @@ section {
   padding: 0 8px;
 }
 
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: #FCFFFC;
+  border-radius: 15px;
+  padding: 4px 7px;
+  width: max-content;
+}
+
 @media screen and (max-width: 768px) {
   .sidemenu-page {
     --sidebar-width: 0;
-    padding: 20px 8px 0 8px; 
   }
 }

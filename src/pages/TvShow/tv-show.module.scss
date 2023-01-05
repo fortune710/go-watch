@@ -15,6 +15,12 @@
     background-color: var(--background-tint);
 }
 
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
 .title {
     display: flex;
 }
@@ -25,6 +31,10 @@
     border-radius: 5px;
     padding: 8px;
     gap: 2em;
+
+    .overview {
+        display: none;
+    }
 
     img {
         width: 30%;
@@ -51,6 +61,14 @@
     }
 }
 
+.seasonsButton {
+    width: 100%;
+    height: 50px;
+    border-radius: 7px;
+    text-transform: capitalize !important;
+    margin: 10px 0;
+}
+
 @media screen and (min-width: 769px){
     .content {
 
@@ -59,7 +77,50 @@
         }
     }
 
+    .reviews {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .currentSeasonSection {
+        width: 60%;
+
+        .overview {
+            display: block;
+        }
+    }
+
     .details {
         display: flex;
+        padding: 20px;
+        align-items: flex-end;
+
+        section {
+            width: 60%;
+            *{
+                margin: 5px 0;
+            }
+        }
+        img {
+            border-radius: 5px;
+        }
+    }
+
+    .providers {
+        ul {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media screen and (min-width: 769px){
+    .providers {
+        ul {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .reviews {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
