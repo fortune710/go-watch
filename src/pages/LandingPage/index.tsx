@@ -40,10 +40,10 @@ export const LandingPage = () => {
                 <img src={Logo} alt="Logo"/>
 
                 <div>
-                    <Button variant="contained">
+                    <Button href="/signup" variant="contained">
                         Sign Up
                     </Button>
-                    <Button sx={secondLoginStyles} variant="outlined">
+                    <Button href="/login" sx={secondLoginStyles} variant="outlined">
                         Login
                     </Button>
                 </div>
@@ -52,7 +52,7 @@ export const LandingPage = () => {
 
             <section ref={ref} className={styles.introduction}>
                 <nav>
-                    <Button sx={loginButtonStyles} variant="outlined">
+                    <Button href="/login" sx={loginButtonStyles} variant="outlined">
                         Login
                     </Button>
                 </nav>
@@ -128,9 +128,6 @@ export const LandingPage = () => {
 
                 </div>
             </section>
-            <Button onClick={() => navigate('/home')}>
-                Go to Home Page
-            </Button>
             <Footer />
         </main>
     )
