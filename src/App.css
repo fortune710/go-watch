@@ -87,5 +87,22 @@ section {
 @media screen and (max-width: 768px) {
   .sidemenu-page {
     --sidebar-width: 0;
+    padding: 0;
+  }
+}
+
+.skeleton {
+  animation: skeleton 1.2s ease-in-out 0s infinite;
+}
+
+@keyframes skeleton {
+  0%{
+      filter: brightness(1.05);
+  }
+  50%{
+      filter: brightness(1.5);
+  }
+  100%{
+      filter: brightness(1.05);
   }
 }
