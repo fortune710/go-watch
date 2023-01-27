@@ -17,6 +17,7 @@ import { FavouritesPage } from './pages/FavourtitesPage';
 import { TVShowSeasonPage } from './pages/TvShowSeasons';
 
 const SignUpPage = lazy(() => import('./pages/SignUp').then(m=> ({ default: m.SignUpPage })))
+const PersonPage = lazy(() => import('./pages/Person').then(m=> ({ default: m.Person })))
 
 const ComingSoon: React.FC = () => {
   return(
@@ -45,6 +46,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/show/:id/season/:season_num" element={<TVShowSeasonPage/>}/>
+        <Route path="/person/:id" element={<PersonPage/>}/>
       </Routes>
     </Suspense>
   )
