@@ -8,7 +8,6 @@ export const useTvShow = (id:string|number|undefined) => {
     const { isLoading: isLoadingDetails, data: details, error } = useQuery(["tv-show", id], () => {
         const data = axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`)
         .then(res => {
-            console.log(res.data)
             return res.data
         })
         return data
