@@ -1,13 +1,14 @@
-import { Avatar, Box, Container, SxProps } from "@mui/material"
+import { Avatar, Container, SxProps } from "@mui/material"
 
 interface ActorCardProps {
     character: string,
     actorName: string,
-    image: string
+    image: string,
+    onClickCard?: React.MouseEventHandler
 }
 
 export const ActorCard: React.FC<ActorCardProps> = (props) => {
-
+    
     const styles: SxProps = {
         padding: '10px 8px',
         width: '250px',
@@ -22,7 +23,7 @@ export const ActorCard: React.FC<ActorCardProps> = (props) => {
         }
     }
     return(
-        <Container sx={styles}>
+        <Container sx={styles} onClick={props.onClickCard}>
             <Avatar sx={{ width: 70, height: 70 }} src={props.image}/>
 
             <div>
