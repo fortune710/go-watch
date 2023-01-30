@@ -204,9 +204,7 @@ export const TVShowPage: React.FC = () => {
                                     onClick={() => navigate(`/show/${show.id}`)}
                                 />
                             )
-                        })
-                            
-                                                
+                        })                    
                     }
                 </Slides>
             </section>
@@ -220,7 +218,9 @@ export const TVShowPage: React.FC = () => {
             <ul>
             {
                 details?.seasons.map((season:any) => (
-                    <li>{season.name}</li>
+                    <li style={{height:'50px'}} onClick={() => navigate(`/show/${id}/season/${season.season_number}`)}>
+                        {season.name}
+                    </li>
                 ))
             }
             </ul>
