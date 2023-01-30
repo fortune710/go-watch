@@ -1,27 +1,77 @@
 .section {
-    width: 100%;
+    --heading-font-size: 40px ;
     padding: 0;
     box-sizing: border-box;
+
+    h2 {
+        font-size: var(--heading-font-size);
+    }
+}
+
+.page {
+    padding: 0 8px;
+}
+
+
+.callToSignIn {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.loginButton {
+    padding: 12px 50px;
+    margin: 10px auto;
+    background-color: var(--primary);
+    text-decoration: none;
+    color: #fff;
+    border-radius: 7px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
 }
 
 .favourites {
+    --grid-cols: 4;
     margin-top: 10px;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    gap: 8px;
 
-    article {
-        width: 90%;
-        margin: 0 auto;
-        img {
-            width: 100%;
-        }
+    article, .skeleton {
+        width: 100%;
+    }
+    
+    article :is(img, .imageHolder){
+        width: 100%;
+        //margin-bottom: 12px;
+    }
+
+    .imageHolder {
+        height: max-content;
     }
 }
 
 @media screen and (max-width: 768px){
     .favourites {
-        grid-template-columns: repeat(2, 1fr);
-
+        --grid-cols: 3;
     }
+
+    .section {
+        --heading-font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .favourites {
+        --grid-cols: 2;
+    }
+
+    .section {
+        --heading-font-size: 25px;
+    }
+
 }

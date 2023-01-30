@@ -35,10 +35,6 @@ export const HomePage: React.FC = () => {
     })
 
 
-    useEffect(() => {
-
-    }, [])
-
     return(
         <>
             <Sidemenu/>
@@ -59,8 +55,8 @@ export const HomePage: React.FC = () => {
                     {
                         trendingMovies?.map((movie: any) => {
                             return (
-                            <div className={styles.scrollCard} onClick={() => navigate(`/movie/${movie.id}`)}>
-                                <img key={movie.id} title={movie.title} src={`https://image.tmdb.org/t/p/w1280${movie?.poster_path}`} alt={movie.title}/>
+                            <div key={movie.id} title={movie?.title} className={styles.scrollCard} onClick={() => navigate(`/movie/${movie.id}`)}>
+                                <img title={movie.title} src={`https://image.tmdb.org/t/p/w1280${movie?.poster_path}`} alt={movie.title}/>
                             </div>
                             )
                         
@@ -84,8 +80,8 @@ export const HomePage: React.FC = () => {
                         {
                             trendingShows ? (
                                 trendingShows?.map((movie: any) => (
-                                    <div className={styles.scrollCard} onClick={() => navigate(`/show/${movie.id}`)}>
-                                        <img key={movie.id} title={movie.title} src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt={movie.title}/>
+                                    <div key={movie.id} className={styles.scrollCard} onClick={() => navigate(`/show/${movie.id}`)}>
+                                        <img title={movie.title} src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt={movie.title}/>
                                     </div>
                                 )) 
                             ): null

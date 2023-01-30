@@ -1,7 +1,14 @@
 import { Google } from "@mui/icons-material"
 import { Button, SxProps, TextField, Snackbar } from "@mui/material"
 import styles from '../SignUp/signup.module.scss';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { 
+    GoogleAuthProvider, 
+    setPersistence, 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    signInWithPopup,
+    inMemoryPersistence
+} from "firebase/auth";
 import { app } from "../../utils";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
