@@ -10,9 +10,16 @@ import { useInView } from "react-intersection-observer";
 import LaptopMockup from "../../assets/laptop.svg";
 import PhoneMockup from "../../assets/phone.svg";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useEffect } from "react";
 export const LandingPage = () => {
     const [ref, inView] = useInView();
     const navigate = useNavigate();
+    const auth = useAuth();
+
+    useEffect(() => {
+        console.log(auth)
+    }, [])
 
     const loginButtonStyles:SxProps = {
         boxShadow: 0,

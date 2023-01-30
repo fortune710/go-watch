@@ -84,6 +84,12 @@ section {
   width: max-content;
 }
 
+.loadingText {
+  width: 100%;
+  border-radius: 5px;
+  height: 10px;
+}
+
 @media screen and (max-width: 768px) {
   .sidemenu-page {
     --sidebar-width: 0;
@@ -93,6 +99,7 @@ section {
 
 .skeleton {
   animation: skeleton 1.2s ease-in-out 0s infinite;
+  border-radius: 5px;
 }
 
 @keyframes skeleton {

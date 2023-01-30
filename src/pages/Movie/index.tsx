@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./movie.module.scss";
 import { Chip } from "@mui/material";
-import { ActorCard, ReviewCard, SimilarMovie, Slides } from "../../components";
+import { ActorCard, ReviewCard, Sidemenu, SimilarMovie, Skeleton, Slides } from "../../components";
 import { BackButton } from "../../components/BackButton/back-button";
+import { useMovies } from "../../hooks/useMovie";
 
 interface Genre {
     id: number,
@@ -12,127 +13,144 @@ interface Genre {
 }
 
 export const MovieDetailPage = () => {
-    const { id } = useParams();
-    const [movie, setMovie] = useState<any>()
-    const [credits, setCredits] = useState<any>()
-    const [reviews, setReviews] = useState<any>();
-    const [similarMovies, setSimilar] = useState<any[]>();
+    const { id } = useParams<{ id: string }>();
+    if(!id) return null
 
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=e77b613c447296755dab014d1426012a&language=en-US`)
-        .then(res => {
-            setMovie(res.data)
-        })
+    const { loadingDetails } = useMovies(id);
+    const data = useMovies(id);
+    const { details, errorOnLoad } = data;
+    const { loadingCredits, credits } = data;
+    const { loadingReviews, reviews } = data;
+    const { loadingSimilarMovies, similarMovies } = data;
 
-        axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=e77b613c447296755dab014d1426012a&language=en-US&language=en-US`)
-        .then(res => {
-            setCredits(res.data)
-        })
-
-        axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=e77b613c447296755dab014d1426012a&language=en-US&language=en-US`)
-        .then(res => {
-            setReviews(res.data)
-        })
-
-        axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=e77b613c447296755dab014d1426012a&language=en-US&language=en-US`)
-        .then(res => {
-            console.log(res.data.results)
-            setSimilar(res.data.results)
-        })
-
-        
-
-    }, [])
   return (
-    <main>
-        <BackButton/>
-        {
-            movie && (
-            <div>
-                <img className={styles.movieImage} src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="Poster"/>
-                <section className={styles.movieInfo}>
-                    <h2>{movie.title}</h2>
-                    <h4>{movie.tagline}</h4>
+    <>
+        <Sidemenu/>
+        <main className="sidemenu-page">
+            <BackButton/>
+            <div className={styles.details}>
+                <Skeleton 
+                    customClassName={styles.loadingImage} 
+                    isVisible={loadingDetails}
+                />
+                {/* Try using an image holder, if UX issues persist */}
+                <img 
+                    className={styles.movieImage} 
+                    src={`https://image.tmdb.org/t/p/w1280${details?.poster_path}`} 
+                    alt={`Poster of ${details?.title}`}
+                />
+                <section>
+                    <h2>{details?.title}</h2>
+                    <h4>{details?.tagline}</h4>
+                    <Skeleton
+                        isVisible={loadingDetails}
+                        customClassName={styles.loadingText}
+                    />
                     <p>
-                        Release Date: {movie.release_date}
+                        Release Date: {details?.release_date}
                     </p>
                     <div>
                         {
-                            movie.genres.map((genre:Genre) => (
+                            details?.genres?.map((genre:Genre) => (
                                 <Chip key={genre.id} color="primary" label={genre.name} clickable={false}/>
                             ))
                         }
                     </div>
 
-                    <div>
-                        <h3>Overview</h3>
-                        <p>{movie.overview}</p>
-                    </div>
                 </section>
             </div>
-            )
 
-        }
-        {
-            credits && (
-                <>
-                <section>
-                    <h2>Cast</h2>
-                    <Slides>
-                    {
-                        credits.cast.map((actor:any) => (
-                            <ActorCard
-                                key={actor.id}
-                                character={actor.character}
-                                image={'https://image.tmdb.org/t/p/w500'+actor.profile_path}
-                                actorName={actor.name}
+            <section>
+                <h3>Overview</h3>
+                <p>{details?.overview}</p>
+                <Skeleton
+                    isVisible={loadingDetails}
+                    customClassName={styles.loadingOverview}
+                />
+            </section>
+            {
+                credits && (
+                    <>
+                    <section>
+                        <h2>Cast</h2>
+                        <Slides>
+                            <Skeleton
+                                customClassName={styles.loadingActors}
+                                isVisible={loadingCredits}
                             />
-                        ))
-                    }
-                    </Slides>
-                </section>
-                
+                            <Skeleton
+                                customClassName={styles.loadingActors}
+                                isVisible={loadingCredits}
+                            />
+                            <Skeleton
+                                customClassName={styles.loadingActors}
+                                isVisible={loadingCredits}
+                            />
+                            <Skeleton
+                                customClassName={styles.loadingActors}
+                                isVisible={loadingCredits}
+                            />
+
+                        {
+                            credits.cast.map((actor:any) => (
+                                <ActorCard
+                                    key={actor.id}
+                                    character={actor.character}
+                                    image={'https://image.tmdb.org/t/p/w500'+actor.profile_path}
+                                    actorName={actor.name}
+                                    onClickCard={() => navigate(`/person/${actor.id}`)}
+                                />
+                            ))
+                        }
+                        </Slides>
+                    </section>
+                    
+                    
+                    </>
+                )
+            }
+
+            {
+                reviews && (
+                <>
+                    <section>
+                        <h2>Reviews</h2>
+                        <div className={styles.reviews}>
+                        {
+                            reviews.results.slice(0, 3).map((review:any) => (
+                                <ReviewCard
+                                    date={review.created_at}
+                                    author={review.author}
+                                    content={review.content}
+                                />
+                            ))
+                        }
+                        </div>
+                    </section>
                 
                 </>
-            )
-        }
+                )
+            }
+            <section>
+                <h3>If you liked this movie, check out these one too</h3>
+                <Slides>
+                {
+                    similarMovies?.map((movie:any) => (
+                        <SimilarMovie
+                            image={'https://image.tmdb.org/t/p/w200'+movie.backdrop_path}
+                            name={movie.title}
+                            rating={movie.vote_average}
+                        />
+                    ))
+                }            
+                </Slides>
 
-        {
-            reviews && (
-            <>
-                <section>
-                    <h2>Reviews</h2>
-                    {
-                        reviews.results.slice(0, 3).map((review:any) => (
-                            <ReviewCard
-                                date={review.created_at}
-                                author={review.author}
-                                content={review.content}
-                            />
-                        ))
-                    }
-                </section>
-            
-            </>
-            )
-        }
-        <section>
-            <h3>If you liked this movie, check out these one too</h3>
-            <Slides>
-            {
-                similarMovies?.map((movie:any) => (
-                    <SimilarMovie
-                        image={'https://image.tmdb.org/t/p/w200'+movie.backdrop_path}
-                        name={movie.title}
-                        rating={movie.vote_average}
-                    />
-                ))
-            }            
-            </Slides>
-
-        </section>
-    </main>
+            </section>
+        </main>
+    
+    </>
   )
 }
 
