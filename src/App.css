@@ -90,6 +90,10 @@ section {
   height: 10px;
 }
 
+.extra-page-padding {
+  padding: 0 8px;
+}
+
 @media screen and (max-width: 768px) {
   .sidemenu-page {
     --sidebar-width: 0;
