@@ -1,0 +1,56 @@
+.container {
+    --gap: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+}
+
+.avatar {
+    --avatar-length: 200px;
+
+    background-color: var(--background-tint);
+    width: var(--avatar-length);
+    height: var(--avatar-length);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.scrollCard {
+    --card-width: 180px;
+
+    width: var(--card-width);
+    height: 250px;
+    background-color: var(--background-tint);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.scrollCard :is(.skeletonAvatar, img){
+    width: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 7px;
+}
+
+.biography {
+    background-color: var(--background-tint);
+    border-radius: 10px;
+    width: 50%;
+    height: auto;
+}
+
+.moreImage {
+    width: 180px;
+    height: 250px;
+}
+
+@media screen and (max-width: 450px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .biography {
+        width: 100%;
+
+    }
+}
