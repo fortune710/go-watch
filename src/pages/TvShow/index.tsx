@@ -5,13 +5,14 @@ import { Avatar, Button, Chip, Snackbar } from "@mui/material";
 import { ActorCard, BackButton, CustomModal, ReviewCard, SecondHeader, SimilarMovie, Slides } from "../../components";
 import { Bookmark, BookmarkAdd, Star } from "@mui/icons-material";
 import { useAuth } from "../../hooks/useAuth";
-import { addDoc, collection, getFirestore, setDoc } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, query, setDoc, where } from "firebase/firestore";
 import { app } from "../../utils";
 import { useEffect, useState } from "react";
 
 import { FastAverageColor } from "fast-average-color";
 import { useInView } from "react-intersection-observer";
 import { useReadDocsFromFirestore } from "../../hooks/useFirestore";
+import { Helmet } from "react-helmet-async";
 
 export const TVShowPage: React.FC = () => {
     const { id } = useParams<{ id:string }>();
@@ -19,13 +20,23 @@ export const TVShowPage: React.FC = () => {
     const show = useTvShow(id);
     const { user } = useAuth();
     const firestore = getFirestore(app);
-    const query = collection(firestore, `users/${user?.uid}/favourites`);
+    const favouritesRef = collection(firestore, `users/${user?.uid}/favourites`);
 
-    const { documents } = useReadDocsFromFirestore(`users/${user?.uid}/favourites`);
+    //const { documents } = useReadDocsFromFirestore(`users/${user?.uid}/favourites`);
     
     useEffect(() => {
-        documents.includes((val:any) => val.id === show?.details.id) ? setIsFavourite(true) : setIsFavourite(false);
-    }, [])
+        if(!show?.details?.id) return;
+        const findFav = query(favouritesRef, where('id', '==', show?.details?.id));
+        getDocs(findFav).then((snapshot) => {
+            snapshot.forEach(doc => {
+                if(!doc.data()) {
+                    setIsFavourite(false);
+                } else {
+                    setIsFavourite(true);
+                }
+            })
+        })
+    }, [show?.details])
 
     const [toast, setToast] = useState({
         open: false,
@@ -37,7 +48,7 @@ export const TVShowPage: React.FC = () => {
 
     const addToFavourites = async () => {
         try {
-            await addDoc(query, {
+            await addDoc(favouritesRef, {
                 id: show?.details.id,
                 title: show?.details.name,
                 poster_path: "https://image.tmdb.org/t/p/w500"+show?.details.poster_path,
@@ -63,6 +74,9 @@ export const TVShowPage: React.FC = () => {
     return(
 
         <>
+        <Helmet>
+            <title>{show?.details?.name || 'Go Watch'}</title>
+        </Helmet>
         { !inView ? <SecondHeader title={details?.name}/> : null }
         <BackButton/>
         <Snackbar open={toast.open} message={toast.message} onClose={() => setToast({ open: false, message: "" })}/>
@@ -99,7 +113,7 @@ export const TVShowPage: React.FC = () => {
                         sx={buttonStyle} 
                         startIcon={<BookmarkAdd/>}
                     >
-                        {'Add to Favourites'}
+                        {isFavourite ? 'Added to Favourites' : 'Add to Favourites'}
                     </Button>
                 </section>
             </div>
