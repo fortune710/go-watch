@@ -9,3 +9,4 @@ export * from './BackButton/back-button';
 export * from './ReviewCard/review-card';
 export * from './Modal/modal';
 export * from './SecondHeader/second-header';
+export * from './Skeleton/skeleton';
